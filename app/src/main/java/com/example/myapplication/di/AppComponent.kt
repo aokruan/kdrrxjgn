@@ -1,18 +1,24 @@
 package com.example.myapplication.di
 
+import android.content.Context
 import com.example.myapplication.App
-import com.example.myapplication.ui.post.PostDetailsFragment
-import com.example.myapplication.ui.post.PostListFragment
+import dagger.BindsInstance
 import dagger.Component
+import dagger.android.AndroidInjectionModule
+import dagger.android.AndroidInjector
 
 @Component(
     modules = [
-        DetailsModule::class
+        AndroidInjectionModule::class,
+        DetailsModule::class,
+        AppModule::class
     ]
 )
 
-interface AppComponent {
-    fun inject(fragment: App)
-    fun inject(fragment: PostListFragment)
-    fun inject(fragment: PostDetailsFragment)
+interface AppComponent : AndroidInjector<App> {
+    @Component.Builder
+    abstract class Builder : AndroidInjector.Builder<App>() {
+        @BindsInstance
+        abstract fun context(context: Context): Builder
+    }
 }

@@ -10,6 +10,8 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 
 class ApiHolder {
     private val BASE_URL: String = "https://api.myjson.com/bins/"
+    private val LARAVEL_API_URL: String = "http://10.214.1.55/api/"
+
     private val gson = App.instance.gson
     val api: Api = initApi()
 
@@ -18,7 +20,7 @@ class ApiHolder {
 
         return Retrofit.Builder()
             .client(httpClientBuilder.build())
-            .baseUrl(BASE_URL)
+            .baseUrl(LARAVEL_API_URL)
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))

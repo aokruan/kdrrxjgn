@@ -5,6 +5,7 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.App
 import com.example.myapplication.R
 import com.example.myapplication.domain.entity.Post
@@ -18,7 +19,6 @@ import kotlinx.android.synthetic.main.fragment_post_list.*
 import javax.inject.Inject
 
 class PostListFragment : BaseFragment() {
-    override fun setListeners() {}
 
     override val layoutRes: Int = R.layout.fragment_post_list
 
@@ -32,13 +32,29 @@ class PostListFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getAll()
         setupRecyclerView()
+
+        if (!viewModel.listOfPost.hasValue()) {
+            viewModel.getFirstPage()
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        App.instance.component.inject(this)
+    }
+
+    override fun setListeners() {
+        srlGates.setOnRefreshListener {
+            viewModel.getFirstPage()
+        }
+
+        rvPostList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                if (!recyclerView.canScrollVertically(1) && recyclerView.canScrollVertically(-1)) {
+                    viewModel.getNextPage()
+                }
+            }
+        })
     }
 
     override fun setModelBindings() {
@@ -46,6 +62,12 @@ class PostListFragment : BaseFragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 postListAdapter.postList = it
+            }
+            .addTo(disposeBag)
+
+        viewModel.isLoading
+            .subscribe { isLoading ->
+                srlGates.isRefreshing = isLoading
             }
             .addTo(disposeBag)
     }

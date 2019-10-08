@@ -7,19 +7,20 @@ import com.example.myapplication.viewModel.post.PostDetailsViewModel
 import com.example.myapplication.viewModel.post.PostListViewModel
 import dagger.Module
 import dagger.Provides
+import dagger.android.support.AndroidSupportInjectionModule
 
 @Module
 class DetailsModule {
-    @Provides
+   @Provides
     fun provideApi(): ApiHolder = ApiHolder()
-
+/*
     @Provides
     fun provideRepository(apiHolder: ApiHolder): PostRepository =
         PostRepository(apiHolder.api)
 
     @Provides
     fun provideInteractor(provideRepository: PostRepository): PostInteractor =
-        PostInteractor(provideRepository)
+        PostInteractor(provideRepository)*/
 
     @Provides
     fun provideViewModel(postInteractor: PostInteractor): PostListViewModel =

@@ -1,5 +1,6 @@
 package com.example.myapplication.ui.base
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.myapplication.presentation.inflate
 import com.google.android.material.snackbar.Snackbar
+import dagger.android.support.AndroidSupportInjection
 
 abstract class BaseFragment : Fragment() {
 
@@ -34,5 +36,10 @@ abstract class BaseFragment : Fragment() {
     open fun showMessage(msg: String) {
         val view = view ?: return
         Snackbar.make(view, msg, Snackbar.LENGTH_SHORT).show()
+    }
+
+    override fun onAttach(context: Context) {
+        AndroidSupportInjection.inject(this)
+        super.onAttach(context)
     }
 }

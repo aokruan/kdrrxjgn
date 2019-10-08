@@ -24,8 +24,6 @@ class PostDetailsFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        App.instance.component.inject(this)
-
         val gate = arguments?.getParcelable("post") as? Post
         gate?.let(viewModel::setPost)
     }
@@ -41,7 +39,7 @@ class PostDetailsFragment : BaseFragment() {
 
     private fun setPost(post: Post) {
         tvTitle.text = post.title
-        tvDescription.text = post.title
+        tvDescription.text = post.description
     }
 
     override fun onDestroyView() {
