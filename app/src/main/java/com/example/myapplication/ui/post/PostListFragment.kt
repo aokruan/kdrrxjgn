@@ -6,7 +6,6 @@ import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.App
 import com.example.myapplication.R
 import com.example.myapplication.domain.entity.Post
 import com.example.myapplication.presentation.hideKeyboard
@@ -20,13 +19,10 @@ import javax.inject.Inject
 
 class PostListFragment : BaseFragment() {
 
-    override val layoutRes: Int = R.layout.fragment_post_list
-
     @Inject
     lateinit var viewModel: PostListViewModel
-
+    override val layoutRes: Int = R.layout.fragment_post_list
     private val disposeBag = CompositeDisposable()
-
     private val postListAdapter = PostListAdapter(onPostClick = this::routeToDetails)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

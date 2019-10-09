@@ -2,6 +2,7 @@ package com.example.myapplication.viewModel.post
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.myapplication.domain.entity.Post
 import com.example.myapplication.domain.interactor.PostInteractor
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -18,15 +19,16 @@ class PostDetailsViewModel(
     private val isSuccess: PublishSubject<Boolean> = PublishSubject.create()
     private val disposable = CompositeDisposable()
 
+    val isLoading: PublishSubject<Boolean> = PublishSubject.create()
     val post: BehaviorSubject<Post> = BehaviorSubject.create()
 
     fun setPost(post: Post) {
 
         interactor.getById(post.id)
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe { }
-            .doFinally { }
-            .doOnSuccess { }
+            .doOnSubscribe { isLoading.onNext(true)  }
+
+            .doOnDispose { isLoading.onNext(false) }
             .subscribeBy(
                 onSuccess = {
                     this.post.onNext(it)

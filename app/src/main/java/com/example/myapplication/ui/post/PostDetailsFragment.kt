@@ -1,9 +1,10 @@
 package com.example.myapplication.ui.post
 
 import android.os.Bundle
-import com.example.myapplication.App
+import android.util.Log
 import com.example.myapplication.R
 import com.example.myapplication.domain.entity.Post
+import com.example.myapplication.presentation.showDialog
 import com.example.myapplication.ui.base.BaseFragment
 import com.example.myapplication.viewModel.post.PostDetailsViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -24,8 +25,8 @@ class PostDetailsFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val gate = arguments?.getParcelable("post") as? Post
-        gate?.let(viewModel::setPost)
+        val post = arguments?.getParcelable("post") as? Post
+        post?.let(viewModel::setPost)
     }
 
     override fun setModelBindings() {
@@ -33,6 +34,16 @@ class PostDetailsFragment : BaseFragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 setPost(it)
+            }
+            .addTo(compositeDisposable)
+
+        viewModel.isLoading
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { isLoading ->
+                Log.e("isLoading from View", isLoading.toString())
+                if (isLoading){
+                    isLoading()
+                }
             }
             .addTo(compositeDisposable)
     }
@@ -45,5 +56,10 @@ class PostDetailsFragment : BaseFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         compositeDisposable.clear()
+    }
+
+    private fun isLoading() {
+        showDialog(this.requireContext(), null, getString(R.string.loading_please_wait))
+        Log.e("showDialog() - Fragment", "")
     }
 }

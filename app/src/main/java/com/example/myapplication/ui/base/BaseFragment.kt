@@ -14,7 +14,11 @@ abstract class BaseFragment : Fragment() {
 
     abstract val layoutRes: Int
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? =
         container?.inflate(layoutRes).also {
             setHasOptionsMenu(true)
         }

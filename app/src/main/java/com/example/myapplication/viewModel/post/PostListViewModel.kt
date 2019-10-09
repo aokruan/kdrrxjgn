@@ -25,24 +25,6 @@ class PostListViewModel @Inject constructor(
     private var nextPage = 1
     private var isEndOfList = false
 
-    fun getAll() {
-        interactor.getAll()
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe { isLoading.onNext(true) }
-            .doFinally { isLoading.onNext(false) }
-            .doOnSuccess { }
-            .subscribeBy(
-                onSuccess = { it ->
-                    it.map { Log.e("ERROR: ", it.toString()) }
-                    //listOfPost.onNext(it)
-                    isSuccess.onNext(true)
-                    isError.onNext(false)
-                },
-                onError = { isError.onNext(true) }
-            )
-            .addTo(disposable)
-    }
-
     fun getFirstPage() {
         reset()
         interactor.getAllPostsByPage(1)

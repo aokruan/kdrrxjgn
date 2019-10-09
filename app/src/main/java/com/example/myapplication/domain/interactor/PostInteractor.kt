@@ -1,8 +1,8 @@
 package com.example.myapplication.domain.interactor
 
 import com.example.myapplication.data.repository.PostRepository
-import com.example.myapplication.domain.entity.Post
 import com.example.myapplication.domain.entity.Pagination
+import com.example.myapplication.domain.entity.Post
 import io.reactivex.Single
 import javax.inject.Inject
 
