@@ -10,8 +10,8 @@ import dagger.android.AndroidInjector
 @Component(
     modules = [
         AndroidInjectionModule::class,
-        DetailsModule::class,
-        AppModule::class
+        AppModule::class,
+        DetailsModule::class
     ]
 )
 

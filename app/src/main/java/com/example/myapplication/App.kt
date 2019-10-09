@@ -1,6 +1,6 @@
 package com.example.myapplication
 
-import android.app.Application
+import com.example.myapplication.di.DaggerAppComponent
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.android.AndroidInjector
@@ -8,9 +8,8 @@ import dagger.android.DaggerApplication
 
 class App : DaggerApplication() {
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-        return DaggerApp
+        return DaggerAppComponent.builder().context(this).create(this)
     }
-
 
     val gson: Gson = GsonBuilder()
         .create()
