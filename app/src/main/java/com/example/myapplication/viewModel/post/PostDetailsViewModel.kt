@@ -2,7 +2,6 @@ package com.example.myapplication.viewModel.post
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.myapplication.domain.entity.Post
 import com.example.myapplication.domain.interactor.PostInteractor
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -26,17 +25,17 @@ class PostDetailsViewModel(
 
         interactor.getById(post.id)
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe { isLoading.onNext(true)  }
-
-            .doOnDispose { isLoading.onNext(false) }
+            .doOnSubscribe { isLoading.onNext(true) }
+            .doFinally { isLoading.onNext(false) }
             .subscribeBy(
                 onSuccess = {
                     this.post.onNext(it)
                     isSuccess.onNext(true)
                     isError.onNext(false)
                 },
-                onError = { isError.onNext(true)
-                Log.e("ERROR", post.id.toString(), it)
+                onError = {
+                    isError.onNext(true)
+                    Log.e("ERROR", post.id.toString(), it)
                 }
             )
             .addTo(disposable)

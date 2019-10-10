@@ -25,14 +25,24 @@ fun Fragment.hideKeyboard() {
 
 fun Fragment.showKeyboard() {
     val manager = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
-    manager?.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_IMPLICIT_ONLY)
+    manager?.toggleSoftInput(
+        InputMethodManager.SHOW_IMPLICIT,
+        InputMethodManager.HIDE_IMPLICIT_ONLY
+    )
 }
 
-fun Fragment.showDialog(context: Context, title: String?, description: String){
-    val alertDialog: LottieAlertDialog = LottieAlertDialog.Builder(context, DialogTypes.TYPE_LOADING)
-        .let { it.setTitle(title) }
-        .setDescription(description)
-        .build()
+fun Fragment.createDialog(
+    context: Context,
+    title: String?,
+    description: String
+): LottieAlertDialog {
+    val alertDialog: LottieAlertDialog =
+        LottieAlertDialog.Builder(context, DialogTypes.TYPE_LOADING)
+            .let { it.setTitle(title) }
+            .setDescription(description)
+            .build()
     alertDialog.setCancelable(false)
     alertDialog.show()
+
+    return alertDialog
 }

@@ -1,6 +1,7 @@
 package com.example.myapplication.ui.post
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
@@ -8,9 +9,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.domain.entity.Post
+import com.example.myapplication.presentation.createDialog
 import com.example.myapplication.presentation.hideKeyboard
 import com.example.myapplication.ui.base.BaseFragment
 import com.example.myapplication.viewModel.post.PostListViewModel
+import com.labters.lottiealertdialoglibrary.LottieAlertDialog
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
@@ -24,6 +27,14 @@ class PostListFragment : BaseFragment() {
     override val layoutRes: Int = R.layout.fragment_post_list
     private val disposeBag = CompositeDisposable()
     private val postListAdapter = PostListAdapter(onPostClick = this::routeToDetails)
+    private val loadingDialog: LottieAlertDialog by lazy {
+        Log.e("LAZY", "LAZY")
+        createDialog(
+            this.requireContext(),
+            null,
+            getString(R.string.loading_please_wait)
+        )
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -63,7 +74,12 @@ class PostListFragment : BaseFragment() {
 
         viewModel.isLoading
             .subscribe { isLoading ->
-                srlGates.isRefreshing = isLoading
+                if (isLoading) {
+                    loadingDialog
+                } else {
+                    loadingDialog.dismiss()
+                    srlGates.isRefreshing = isLoading
+                }
             }
             .addTo(disposeBag)
     }

@@ -2,15 +2,19 @@ package com.example.myapplication.ui.post
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import com.example.myapplication.R
 import com.example.myapplication.domain.entity.Post
-import com.example.myapplication.presentation.showDialog
+import com.example.myapplication.presentation.createDialog
 import com.example.myapplication.ui.base.BaseFragment
 import com.example.myapplication.viewModel.post.PostDetailsViewModel
+import com.labters.lottiealertdialoglibrary.LottieAlertDialog
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
-import kotlinx.android.synthetic.main.fragment_post_details.*
+import kotlinx.android.synthetic.main.fragment_post_details.tvDescription
+import kotlinx.android.synthetic.main.fragment_post_details.tvTitle
+import kotlinx.android.synthetic.main.post_item.*
 import javax.inject.Inject
 
 class PostDetailsFragment : BaseFragment() {
@@ -19,11 +23,19 @@ class PostDetailsFragment : BaseFragment() {
 
     @Inject
     lateinit var viewModel: PostDetailsViewModel
+    private val loadingDialog: LottieAlertDialog by lazy {
+        Log.e("LAZY", "LAZY")
+        createDialog(
+            this.requireContext(),
+            null,
+            getString(R.string.loading_please_wait)
+        )
+    }
 
     private val compositeDisposable = CompositeDisposable()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val post = arguments?.getParcelable("post") as? Post
         post?.let(viewModel::setPost)
@@ -38,11 +50,12 @@ class PostDetailsFragment : BaseFragment() {
             .addTo(compositeDisposable)
 
         viewModel.isLoading
-            .observeOn(AndroidSchedulers.mainThread())
             .subscribe { isLoading ->
                 Log.e("isLoading from View", isLoading.toString())
-                if (isLoading){
-                    isLoading()
+                if (isLoading) {
+                    loadingDialog
+                } else {
+                    loadingDialog.dismiss()
                 }
             }
             .addTo(compositeDisposable)
@@ -56,10 +69,5 @@ class PostDetailsFragment : BaseFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         compositeDisposable.clear()
-    }
-
-    private fun isLoading() {
-        showDialog(this.requireContext(), null, getString(R.string.loading_please_wait))
-        Log.e("showDialog() - Fragment", "")
     }
 }

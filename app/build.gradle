@@ -67,8 +67,12 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:2.1.0"
     implementation "androidx.navigation:navigation-ui-ktx:2.1.0"
 
-    implementation 'com.airbnb.android:lottie:2.7.0'
+    // CustomAlertDialog
+    implementation 'com.airbnb.android:lottie:3.0.7'
     implementation 'com.github.mayuce:LottieAlertDialog:1.1'
+
+    // Animations
+    implementation 'com.airbnb.android:lottie:3.0.7'
 }
 
 kapt {

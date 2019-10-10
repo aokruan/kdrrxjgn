@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.domain.entity.Post
 import com.example.myapplication.presentation.inflate
+import kotlinx.android.synthetic.main.post_item.*
 import kotlinx.android.synthetic.main.post_item.view.*
 import kotlin.properties.Delegates
 
@@ -33,7 +34,9 @@ class PostListAdapter(
             }
             with(itemView) {
                 tvTitle.text = post.title
-                tvDescription.text = post.description
+                //tvDescription.text = post.description
+                tvAvailability.text = post.availability.toString()
+                tvPrice.text = post.price.toString()
             }
         }
     }
