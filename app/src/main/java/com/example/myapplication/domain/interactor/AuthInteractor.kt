@@ -8,4 +8,7 @@ import javax.inject.Inject
 class AuthInteractor @Inject constructor(private val repository: AuthRepository) {
     fun signIn(email: String, password: String): Single<AuthToken> =
         repository.signIn(email, password)
+
+    fun signUp(name:String, email: String, password: String, passwordConfirmation:String) =
+        repository.signUp(name, email, password, passwordConfirmation)
 }

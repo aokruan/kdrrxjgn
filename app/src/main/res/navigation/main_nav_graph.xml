@@ -12,6 +12,9 @@
         <action
             android:id="@+id/actionToPostList"
             app:destination="@+id/postListFragment" />
+        <action
+            android:id="@+id/actionToSignUp"
+            app:destination="@+id/signUpFragment" />
     </fragment>
 
     <fragment
@@ -27,5 +30,16 @@
         android:id="@+id/postDetailsFragment"
         android:name="com.example.myapplication.ui.post.PostDetailsFragment"
         tools:layout="@layout/fragment_post_details" />
+
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.example.myapplication.ui.auth.SignUpFragment"
+        tools:layout="@layout/fragment_signup">
+        <action
+            android:id="@+id/actionToAuthFragment"
+            app:popUpTo="@id/authFragment"
+            app:destination="@id/authFragment"
+            app:launchSingleTop="@layout/fragment_auth" />
+    </fragment>
 
 </navigation>

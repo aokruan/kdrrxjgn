@@ -1,27 +1,23 @@
 package com.example.myapplication.ui.auth
 
-import android.os.Bundle
 import android.util.Log
-import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 import com.example.myapplication.presentation.createDialog
-import com.example.myapplication.presentation.showKeyboard
 import com.example.myapplication.ui.base.BaseFragment
-import com.example.myapplication.viewModel.auth.AuthViewModel
+import com.example.myapplication.viewModel.auth.SignUpViewModel
 import com.labters.lottiealertdialoglibrary.LottieAlertDialog
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
-import kotlinx.android.synthetic.main.fragment_auth.*
 import kotlinx.android.synthetic.main.fragment_auth.etEmail
 import kotlinx.android.synthetic.main.fragment_auth.etPassword
 import kotlinx.android.synthetic.main.fragment_signup.*
 import javax.inject.Inject
 
-class AuthFragment : BaseFragment() {
+class SignUpFragment : BaseFragment() {
     @Inject
-    lateinit var viewModel: AuthViewModel
-    override val layoutRes: Int = R.layout.fragment_auth
+    lateinit var viewModel: SignUpViewModel
+    override val layoutRes: Int = R.layout.fragment_signup
     private val compositeDisposable = CompositeDisposable()
     private val loadingDialog: LottieAlertDialog by lazy {
         createDialog(
@@ -56,23 +52,17 @@ class AuthFragment : BaseFragment() {
     }
 
     override fun setListeners() {
-        btnSignIn.setOnClickListener {
+        btnSignUp.setOnClickListener {
+            val name = etName.text.toString()
             val email = etEmail.text.toString()
             val password = etPassword.text.toString()
-            viewModel.signIn(email, password)
-        }
-
-        tvSignUp.setOnClickListener {
-            routeToSignUp()
+            val passwordConfirmation = etPasswordConfirmation.text.toString()
+            viewModel.signUp(name, email, password, passwordConfirmation)
         }
     }
 
     private fun routeToPostList() {
-        findNavController().navigate(R.id.actionToPostList)
-    }
-
-    private fun routeToSignUp() {
-        findNavController().navigate(R.id.actionToSignUp)
+        findNavController().navigate(R.id.actionToAuthFragment)
     }
 
     override fun onDestroyView() {
