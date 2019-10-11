@@ -2,7 +2,10 @@
     <string name="app_name">My Application</string>
 
     <string name="loading_please_wait">Происходит загрузка данных\nПожалуйста, подождите</string>
+    <string name="auth_checking_please_wait">Проверка подлинности данных \nПожалуйста, подождите</string>
 
     <string name="ruble">₽</string>
     <string name="units">шт.</string>
+    <string name="text_welcome">Войдите с помощью учётных данных \nили создайте новый акаунт</string>
+    <string name="text_signup">Создать учётную запись</string>
 </resources>

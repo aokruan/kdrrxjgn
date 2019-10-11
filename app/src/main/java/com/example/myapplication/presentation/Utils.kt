@@ -42,7 +42,5 @@ fun Fragment.createDialog(
             .setDescription(description)
             .build()
     alertDialog.setCancelable(false)
-    alertDialog.show()
-
     return alertDialog
 }

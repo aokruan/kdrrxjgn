@@ -1,5 +1,6 @@
 package com.example.myapplication.di
 
+import com.example.myapplication.ui.auth.AuthFragment
 import com.example.myapplication.ui.main.MainActivity
 import com.example.myapplication.ui.post.PostDetailsFragment
 import com.example.myapplication.ui.post.PostListFragment
@@ -17,4 +18,7 @@ interface AppModule {
 
     @ContributesAndroidInjector
     fun postDetailsFragmentInjector(): PostDetailsFragment
+
+    @ContributesAndroidInjector
+    fun authFragmentInjector(): AuthFragment
 }

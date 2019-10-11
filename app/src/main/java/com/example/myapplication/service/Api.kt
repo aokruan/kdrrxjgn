@@ -1,11 +1,11 @@
 package com.example.myapplication.service
 
+import com.example.myapplication.domain.entity.AuthToken
 import com.example.myapplication.domain.entity.Pagination
 import com.example.myapplication.domain.entity.Post
+import com.google.gson.JsonObject
 import io.reactivex.Single
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface Api {
     @GET("products")
@@ -18,4 +18,10 @@ interface Api {
     fun getAllPostsByPage(
         @Query("page") page: Int
     ): Single<Pagination<Post>>
+
+    @Headers("Content-Type: application/json")
+    @POST("auth/login")
+    fun signIn(
+        @Body body: JsonObject
+    ): Single<AuthToken>
 }
