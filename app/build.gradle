@@ -36,11 +36,11 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     // Dagger(Dependency injection)
-    implementation "com.google.dagger:dagger:2.16"
-    implementation "com.google.dagger:dagger-android:2.16"
-    implementation "com.google.dagger:dagger-android-support:2.16"
-    kapt "com.google.dagger:dagger-compiler:2.16"
-    kapt "com.google.dagger:dagger-android-processor:2.16"
+    implementation "com.google.dagger:dagger:2.24"
+    implementation "com.google.dagger:dagger-android:2.24"
+    implementation "com.google.dagger:dagger-android-support:2.24"
+    kapt "com.google.dagger:dagger-compiler:2.24"
+    kapt "com.google.dagger:dagger-android-processor:2.24"
 
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.6.0'

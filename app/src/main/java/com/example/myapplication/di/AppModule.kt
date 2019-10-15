@@ -1,5 +1,6 @@
 package com.example.myapplication.di
 
+import com.example.myapplication.App
 import com.example.myapplication.ui.auth.AuthFragment
 import com.example.myapplication.ui.auth.SignUpFragment
 import com.example.myapplication.ui.main.MainActivity
@@ -25,4 +26,7 @@ interface AppModule {
 
     @ContributesAndroidInjector
     fun signUpFragmentInjector(): SignUpFragment
+
+    @ContributesAndroidInjector
+    fun appInjector(): App
 }
