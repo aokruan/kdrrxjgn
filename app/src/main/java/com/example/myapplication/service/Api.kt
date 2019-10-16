@@ -9,13 +9,13 @@ import io.reactivex.Single
 import retrofit2.http.*
 
 interface Api {
-    @GET("products")
+    @GET("auth/products")
     fun getAll(): Single<List<Post>>
 
-    @GET("products/{id}")
+    @GET("auth/products/{id}")
     fun getById(@Path("id") id: Long): Single<Post>
 
-    @GET("products")
+    @GET("auth/products")
     fun getAllPostsByPage(
         @Query("page") page: Int
     ): Single<Pagination<Post>>

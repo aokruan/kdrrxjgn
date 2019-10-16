@@ -7,6 +7,7 @@ import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.App
 import com.example.myapplication.R
 import com.example.myapplication.domain.entity.Post
 import com.example.myapplication.presentation.createDialog
@@ -28,7 +29,6 @@ class PostListFragment : BaseFragment() {
     private val disposeBag = CompositeDisposable()
     private val postListAdapter = PostListAdapter(onPostClick = this::routeToDetails)
     private val loadingDialog: LottieAlertDialog by lazy {
-        Log.e("LAZY", "LAZY")
         createDialog(
             this.requireContext(),
             null,
@@ -38,16 +38,11 @@ class PostListFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setupRecyclerView()
 
         if (!viewModel.listOfPost.hasValue()) {
             viewModel.getFirstPage()
         }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
     }
 
     override fun setListeners() {

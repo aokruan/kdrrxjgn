@@ -1,7 +1,6 @@
 package com.example.myapplication.di
 
-import android.content.Context
-import android.content.SharedPreferences
+import com.example.myapplication.App
 import com.example.myapplication.data.repository.SettingsRepository
 import com.example.myapplication.domain.interactor.PostInteractor
 import com.example.myapplication.service.Api
@@ -12,11 +11,22 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
+
 
 @Module
 class DetailsModule {
+    @Singleton
     @Provides
     fun provideApi(gson: Gson): Api = ApiHolder(gson).api
+
+    @Singleton
+    @Provides
+    fun provideApiHolder(gson: Gson): ApiHolder = ApiHolder(gson)
+
+    @Singleton
+    @Provides
+    fun provideGson(): Gson = GsonBuilder().create()
 
     @Provides
     fun provideViewModel(postInteractor: PostInteractor): PostListViewModel =
@@ -27,13 +37,6 @@ class DetailsModule {
         PostDetailsViewModel(postInteractor)
 
     @Provides
-    fun provideGson(): Gson = GsonBuilder().create()
-
-    @Provides
-    fun provideSharedPreferences(context: Context): SharedPreferences =
-        context.getSharedPreferences("SharedPreferences", Context.MODE_PRIVATE)
-
-    @Provides
-    fun provideSettingsRepository(gson: Gson, source: SharedPreferences): SettingsRepository =
-        SettingsRepository(source, gson)
+    fun provideSettingsRepository(gson: Gson): SettingsRepository =
+        SettingsRepository(gson, App.sharedPreferences)
 }

@@ -49,6 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:hint="Email"
+        android:text="root@example.com"
         android:maxLength="30"
         android:singleLine="true"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -70,6 +71,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:hint="Пароль"
+        android:text="qwe123"
         android:maxLength="30"
         android:singleLine="true"
         app:layout_constraintTop_toBottomOf="@+id/etEmail" />

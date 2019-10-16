@@ -6,6 +6,7 @@ import com.example.myapplication.ui.auth.SignUpFragment
 import com.example.myapplication.ui.main.MainActivity
 import com.example.myapplication.ui.post.PostDetailsFragment
 import com.example.myapplication.ui.post.PostListFragment
+import com.google.gson.Gson
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
@@ -29,4 +30,7 @@ interface AppModule {
 
     @ContributesAndroidInjector
     fun appInjector(): App
+
+    @ContributesAndroidInjector
+    fun gsonInject():Gson
 }

@@ -5,9 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.example.myapplication.common.CustomException
 import com.example.myapplication.common.UnexpectedException
 import com.example.myapplication.domain.entity.AuthToken
-import com.example.myapplication.domain.entity.Post
 import com.example.myapplication.domain.interactor.AuthInteractor
-import com.example.myapplication.domain.interactor.PostInteractor
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
@@ -34,12 +32,13 @@ class AuthViewModel @Inject constructor(
             .doFinally { isLoading.onNext(false) }
             .subscribeBy(
                 onSuccess = {
-                    Log.e("RESULT", it.accessToken)
+                    Log.e("TOKEN", it.authToken)
                     this.authToken.onNext(it)
                     isSuccess.onNext(true)
                     isError.onNext(false)
                 },
                 onError = { exception ->
+                    Log.e("Request Error", exception.toString())
                     isError.onNext(true)
                     val customException = exception as? CustomException
                         ?: UnexpectedException

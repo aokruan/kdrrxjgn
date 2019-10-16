@@ -30,7 +30,6 @@ class SignUpFragment : BaseFragment() {
     override fun setModelBindings() {
         viewModel.isLoading
             .subscribe { isLoading ->
-                Log.e("isLoading from View", isLoading.toString())
                 if (isLoading) {
                     loadingDialog.show()
                 } else {

@@ -5,18 +5,19 @@ import androidx.preference.PreferenceManager
 import com.example.myapplication.data.repository.SettingsRepository
 import com.example.myapplication.di.DaggerAppComponent
 import com.example.myapplication.service.ApiHolder
+import dagger.Lazy
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 import javax.inject.Inject
 
 class App : DaggerApplication() {
-
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
         return DaggerAppComponent.builder().context(this).create(this)
     }
 
     @Inject
-    lateinit var settingsRepository: SettingsRepository
+    lateinit var settingsRepository: Lazy<SettingsRepository>
+
     @Inject
     lateinit var apiHolder: ApiHolder
 
@@ -24,7 +25,7 @@ class App : DaggerApplication() {
         super.onCreate()
         instance = this
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        settingsRepository.authToken?.accessToken?.let { token ->
+        settingsRepository.get().authToken?.authToken?.let { token ->
             apiHolder.authToken = token
         }
     }
