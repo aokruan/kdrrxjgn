@@ -1,6 +1,7 @@
 package com.example.myapplication.di
 
 import com.example.myapplication.App
+import com.example.myapplication.service.ApiHolder
 import com.example.myapplication.ui.auth.AuthFragment
 import com.example.myapplication.ui.auth.SignUpFragment
 import com.example.myapplication.ui.main.MainActivity

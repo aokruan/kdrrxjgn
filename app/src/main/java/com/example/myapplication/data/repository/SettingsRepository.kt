@@ -1,7 +1,6 @@
 package com.example.myapplication.data.repository
 
 import android.content.SharedPreferences
-import com.example.myapplication.R
 import com.example.myapplication.domain.entity.AuthToken
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException

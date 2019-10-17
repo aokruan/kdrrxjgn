@@ -21,7 +21,6 @@ class ApiHolder(var gson: Gson) {
 
     var authToken: String? = null
         set(value) {
-            Log.e("ApiH_AuthToken", value.toString())
             field = value
             authInterceptor.token = value
         }

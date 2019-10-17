@@ -18,7 +18,7 @@ import javax.inject.Singleton
 class DetailsModule {
     @Singleton
     @Provides
-    fun provideApi(gson: Gson): Api = ApiHolder(gson).api
+    fun provideApi(apiHolder: ApiHolder): Api = apiHolder.api
 
     @Singleton
     @Provides

@@ -1,6 +1,5 @@
 package com.example.myapplication.domain.interactor
 
-import android.util.Log
 import com.example.myapplication.data.repository.AuthRepository
 import com.example.myapplication.data.repository.SettingsRepository
 import com.example.myapplication.domain.entity.AuthToken
@@ -19,7 +18,6 @@ class AuthInteractor @Inject constructor(
             .doOnSuccess(::onSuccessAuth)
 
     private fun onSuccessAuth(authToken: AuthToken) {
-        Log.e("authToken", authToken.authToken)
         settingsRepository.authToken = authToken
         apiHolder.authToken = authToken.authToken
     }

@@ -29,13 +29,13 @@ class PostDetailsViewModel(
             .doFinally { isLoading.onNext(false) }
             .subscribeBy(
                 onSuccess = {
+                    Log.d("RESULT", it.toString())
                     this.post.onNext(it)
                     isSuccess.onNext(true)
                     isError.onNext(false)
                 },
                 onError = {
                     isError.onNext(true)
-                    Log.e("ERROR", post.id.toString(), it)
                 }
             )
             .addTo(disposable)

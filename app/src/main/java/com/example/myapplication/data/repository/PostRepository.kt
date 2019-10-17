@@ -12,6 +12,4 @@ class PostRepository @Inject constructor(private val api: Api) {
 
     fun getAllPostsByPage(page: Int): Single<Pagination<Post>> =
         api.getAllPostsByPage(page)
-
-    fun getAll(): Single<List<Post>> = api.getAll()
 }

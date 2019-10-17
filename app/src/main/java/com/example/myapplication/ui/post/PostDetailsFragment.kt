@@ -24,7 +24,6 @@ class PostDetailsFragment : BaseFragment() {
     @Inject
     lateinit var viewModel: PostDetailsViewModel
     private val loadingDialog: LottieAlertDialog by lazy {
-        Log.e("LAZY", "LAZY")
         createDialog(
             this.requireContext(),
             null,
@@ -51,7 +50,6 @@ class PostDetailsFragment : BaseFragment() {
 
         viewModel.isLoading
             .subscribe { isLoading ->
-                Log.e("isLoading from View", isLoading.toString())
                 if (isLoading) {
                     loadingDialog
                 } else {
@@ -62,6 +60,7 @@ class PostDetailsFragment : BaseFragment() {
     }
 
     private fun setPost(post: Post) {
+
         tvTitle.text = post.title
         tvDescription.text = post.description
     }

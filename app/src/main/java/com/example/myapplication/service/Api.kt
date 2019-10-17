@@ -9,9 +9,6 @@ import io.reactivex.Single
 import retrofit2.http.*
 
 interface Api {
-    @GET("auth/products")
-    fun getAll(): Single<List<Post>>
-
     @GET("auth/products/{id}")
     fun getById(@Path("id") id: Long): Single<Post>
 

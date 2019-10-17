@@ -22,7 +22,6 @@ class AuthViewModel @Inject constructor(
     val error: PublishSubject<String> = PublishSubject.create()
     private val disposable = CompositeDisposable()
 
-    val authToken: BehaviorSubject<AuthToken> = BehaviorSubject.create()
     val isLoading: PublishSubject<Boolean> = PublishSubject.create()
 
     fun signIn(email:String, password:String) {
@@ -32,8 +31,6 @@ class AuthViewModel @Inject constructor(
             .doFinally { isLoading.onNext(false) }
             .subscribeBy(
                 onSuccess = {
-                    Log.e("TOKEN", it.authToken)
-                    this.authToken.onNext(it)
                     isSuccess.onNext(true)
                     isError.onNext(false)
                 },
