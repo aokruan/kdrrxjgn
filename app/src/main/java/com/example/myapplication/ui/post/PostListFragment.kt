@@ -1,13 +1,11 @@
 package com.example.myapplication.ui.post
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.App
 import com.example.myapplication.R
 import com.example.myapplication.domain.entity.Post
 import com.example.myapplication.presentation.createDialog
@@ -39,14 +37,13 @@ class PostListFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
-
         if (!viewModel.listOfPost.hasValue()) {
             viewModel.getFirstPage()
         }
     }
 
     override fun setListeners() {
-        srlGates.setOnRefreshListener {
+        srlPosts.setOnRefreshListener {
             viewModel.getFirstPage()
         }
 
@@ -73,7 +70,7 @@ class PostListFragment : BaseFragment() {
                     loadingDialog
                 } else {
                     loadingDialog.dismiss()
-                    srlGates.isRefreshing = isLoading
+                    srlPosts.isRefreshing = isLoading
                 }
             }
             .addTo(disposeBag)

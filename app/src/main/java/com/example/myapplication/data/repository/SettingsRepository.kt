@@ -1,6 +1,8 @@
 package com.example.myapplication.data.repository
 
 import android.content.SharedPreferences
+import com.example.myapplication.App
+import com.example.myapplication.R
 import com.example.myapplication.domain.entity.AuthToken
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
@@ -22,5 +24,12 @@ class SettingsRepository @Inject constructor(
             sharedPreferences.edit()
                 .putString("authToken", gson.toJson(value))
                 .apply()
+        }
+
+    val isValidated: Int?
+        get() {
+            val accessToken = App.sharedPreferences.getString("authToken", "").toString()
+            return if (accessToken.isNotBlank() && accessToken.length == 1091)
+                R.id.actionToPostList else R.id.authFragment
         }
 }

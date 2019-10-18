@@ -1,14 +1,11 @@
 package com.example.myapplication.ui.auth
 
-import android.util.Log
 import androidx.navigation.fragment.findNavController
-import com.example.myapplication.App
 import com.example.myapplication.R
 import com.example.myapplication.presentation.createDialog
 import com.example.myapplication.ui.base.BaseFragment
 import com.example.myapplication.viewModel.auth.AuthViewModel
 import com.labters.lottiealertdialoglibrary.LottieAlertDialog
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import kotlinx.android.synthetic.main.fragment_auth.*

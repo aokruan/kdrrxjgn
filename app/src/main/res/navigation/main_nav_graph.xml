@@ -11,7 +11,9 @@
         tools:layout="@layout/fragment_auth">
         <action
             android:id="@+id/actionToPostList"
-            app:destination="@+id/postListFragment" />
+            app:destination="@+id/postListFragment"
+            app:popUpTo="@+id/main_nav_graph"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/actionToSignUp"
             app:destination="@+id/signUpFragment" />
