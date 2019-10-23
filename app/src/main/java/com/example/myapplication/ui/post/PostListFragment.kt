@@ -7,9 +7,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
+import com.example.myapplication.common.EmptyList
+import com.example.myapplication.data.repository.SettingsRepository
 import com.example.myapplication.domain.entity.Post
 import com.example.myapplication.presentation.createDialog
 import com.example.myapplication.presentation.hideKeyboard
+import com.example.myapplication.presentation.isVisible
 import com.example.myapplication.ui.base.BaseFragment
 import com.example.myapplication.viewModel.post.PostListViewModel
 import com.labters.lottiealertdialoglibrary.LottieAlertDialog
@@ -23,6 +26,8 @@ class PostListFragment : BaseFragment() {
 
     @Inject
     lateinit var viewModel: PostListViewModel
+    @Inject
+    lateinit var settingsRepository: SettingsRepository
     override val layoutRes: Int = R.layout.fragment_post_list
     private val disposeBag = CompositeDisposable()
     private val postListAdapter = PostListAdapter(onPostClick = this::routeToDetails)
@@ -74,6 +79,13 @@ class PostListFragment : BaseFragment() {
                 }
             }
             .addTo(disposeBag)
+
+        viewModel.emptyStatus
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { status ->
+                setEmptyListStatus(status)
+            }
+            .addTo(disposeBag)
     }
 
     private fun setupRecyclerView() {
@@ -89,6 +101,16 @@ class PostListFragment : BaseFragment() {
         hideKeyboard()
         val bundle = bundleOf("post" to post)
         findNavController().navigate(R.id.actionToPostDetails, bundle)
+    }
+
+    private fun setEmptyListStatus(status: EmptyList) {
+        if (status != EmptyList.NONE) {
+            tvEmptyList.text = getString(status.message)
+            tvEmptyList.setCompoundDrawablesWithIntrinsicBounds(0, status.icon, 0, 0)
+            tvEmptyList.isVisible = true
+        } else {
+            tvEmptyList.isVisible = false
+        }
     }
 
     override fun onDestroyView() {

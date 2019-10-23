@@ -9,18 +9,24 @@ import javax.inject.Inject
 
 class AuthRepository @Inject constructor(private val api: Api) {
     fun signIn(email: String, password: String): Single<AuthToken> {
-        val requestBody = JsonObject()
-        requestBody.addProperty("email", email)
-        requestBody.addProperty("password", password)
-        return api.signIn(requestBody)
+        return api.signIn(JsonObject().apply {
+            addProperty("email", email)
+            addProperty("password", password)
+        })
     }
 
-    fun signUp(name:String, email: String, password: String, passwordConfirmation:String): Completable {
-        val requestBody = JsonObject()
-        requestBody.addProperty("name", name)
-        requestBody.addProperty("email", email)
-        requestBody.addProperty("password", password)
-        requestBody.addProperty("password_confirmation", passwordConfirmation)
-        return api.signUp(requestBody)
+    fun signUp(
+        name: String,
+        email: String,
+        password: String,
+        passwordConfirmation: String
+    ): Completable {
+        return api.signUp(JsonObject().apply {
+            addProperty("name", name)
+            addProperty("email", email)
+            addProperty("password", password)
+            addProperty("password_confirmation", passwordConfirmation)
+        }
+        )
     }
 }

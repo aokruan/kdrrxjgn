@@ -10,4 +10,6 @@
     <string name="text_press_signup">Создать учётную запись</string>
 
     <string name="text_signup">Заполните поля \nчтобы создать новый акаунт</string>
+
+    <string name="post_empty_list">Список пуст</string>
 </resources>

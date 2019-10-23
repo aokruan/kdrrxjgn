@@ -1,9 +1,11 @@
 package com.example.myapplication.ui.auth
 
+import android.content.Intent
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 import com.example.myapplication.presentation.createDialog
 import com.example.myapplication.ui.base.BaseFragment
+import com.example.myapplication.ui.main.MainActivity
 import com.example.myapplication.viewModel.auth.AuthViewModel
 import com.labters.lottiealertdialoglibrary.LottieAlertDialog
 import io.reactivex.disposables.CompositeDisposable
@@ -43,7 +45,7 @@ class AuthFragment : BaseFragment() {
         viewModel.isSuccess
             .subscribe {
 
-                routeToPostList()
+                routeToMainScreen()
             }
             .addTo(compositeDisposable)
     }
@@ -61,8 +63,10 @@ class AuthFragment : BaseFragment() {
         }
     }
 
-    private fun routeToPostList() {
-        findNavController().navigate(R.id.actionToPostList)
+    private fun routeToMainScreen() {
+        val intent = Intent(activity, MainActivity::class.java)
+        startActivity(intent)
+        activity?.finish()
     }
 
     private fun routeToSignUp() {

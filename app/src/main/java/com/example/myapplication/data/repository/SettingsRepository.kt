@@ -26,10 +26,11 @@ class SettingsRepository @Inject constructor(
                 .apply()
         }
 
-    val isValidated: Int?
+    val isValidatedAuthToken: Int?
         get() {
             val accessToken = App.sharedPreferences.getString("authToken", "").toString()
-            return if (accessToken.isNotBlank() && accessToken.length == 1091)
-                R.id.actionToPostList else R.id.authFragment
-        }
+            return if (accessToken.isNotBlank())
+                0 else R.id.authFragment
+}
+
 }
