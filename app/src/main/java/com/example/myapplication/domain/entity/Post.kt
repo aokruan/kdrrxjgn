@@ -32,6 +32,7 @@ data class Post(
     val availability: Int,
     val created_at: String,
     val description: String,
+    val image: String,
     val id: Long,
     val price: Int,
     val title: String,

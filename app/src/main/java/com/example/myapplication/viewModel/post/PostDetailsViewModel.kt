@@ -22,7 +22,6 @@ class PostDetailsViewModel(
     val post: BehaviorSubject<Post> = BehaviorSubject.create()
 
     fun setPost(post: Post) {
-
         interactor.getById(post.id)
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { isLoading.onNext(true) }
