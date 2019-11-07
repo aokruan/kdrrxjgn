@@ -1,0 +1,70 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory
+        android:key="pref_key_storage_settings"
+        android:title="Основные настройки">
+        <SwitchPreferenceCompat
+            app:key="sync"
+            app:title="Разрешить редактирование" />
+
+        <SwitchPreferenceCompat
+            app:dependency="sync"
+            app:key="attachment"
+            app:summaryOff="Выбрав данный пункт Вы соглашаетесь на рассылку рекламных сообщений"
+            app:summaryOn="Рассылка рекламных сообщений, новостей и т.д."
+            app:title="Разрешть рекламу" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="pref_sync"
+            android:summary="Отпрвка в сеть"
+            android:title="Ожидать завершения запросов" />
+
+        <ListPreference
+            android:defaultValue="Обычный"
+            android:dependency="pref_sync"
+            android:dialogTitle="Выберите режим "
+            android:entries="@array/job_mode"
+            android:entryValues="@array/job_mode"
+            android:key="pref_syncConnectionType"
+            android:title="Выбор режима работы" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="pref_key_storage_settings"
+        android:title="Дополнительные настройки">
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="pref_key_auto_delete"
+            android:summary="Дополнительные настройки"
+            android:title="Дополнительные настройки 1" />
+        <Preference
+            android:dependency="pref_key_auto_delete"
+            android:key="pref_key_sms_delete_limit"
+            android:summary="Дополнительные настройки"
+            android:title="Дополнительные настройки 2" />
+        <Preference
+            android:dependency="pref_key_auto_delete"
+            android:key="pref_key_mms_delete_limit"
+            android:summary="Дополнительные настройки"
+            android:title="Дополнительные настройки 3" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="pref_key_storage_settings"
+        android:title="Дополнительные настройки 2">
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="pref_key_auto_delete"
+            android:summary="Дополнительные настройки"
+            android:title="Дополнительные настройки 1" />
+        <Preference
+            android:dependency="pref_key_auto_delete"
+            android:key="pref_key_sms_delete_limit"
+            android:summary="Дополнительные настройки"
+            android:title="Дополнительные настройки 2" />
+        <Preference
+            android:dependency="pref_key_auto_delete"
+            android:key="pref_key_mms_delete_limit"
+            android:summary="Дополнительные настройки"
+            android:title="Дополнительные настройки 3" />
+    </PreferenceCategory>
+</PreferenceScreen>

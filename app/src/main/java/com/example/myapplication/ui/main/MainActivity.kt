@@ -1,6 +1,8 @@
 package com.example.myapplication.ui.main
 
 import android.os.Bundle
+import androidx.navigation.fragment.NavHostFragment.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 import com.example.myapplication.data.repository.SettingsRepository
 import dagger.Lazy
@@ -19,12 +21,11 @@ class MainActivity : DaggerAppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        toolbar.title = "Conceptive"
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.action_recents -> ""
+                R.id.bnRecents -> findNavController(main_host_fragment).navigate(R.id.actionToPostListFragment)
                 R.id.action_favorites -> ""
-                R.id.action_nearby -> ""
+                R.id.bnNearby -> findNavController(main_host_fragment).navigate(R.id.actionToSettings)
             }
             true
         }

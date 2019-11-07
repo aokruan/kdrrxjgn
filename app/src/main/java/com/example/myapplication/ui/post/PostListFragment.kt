@@ -1,6 +1,7 @@
 package com.example.myapplication.ui.post
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
@@ -19,6 +20,7 @@ import com.labters.lottiealertdialoglibrary.LottieAlertDialog
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_post_list.*
 import javax.inject.Inject
 
@@ -45,6 +47,7 @@ class PostListFragment : BaseFragment() {
         if (!viewModel.listOfPost.hasValue()) {
             viewModel.getFirstPage()
         }
+        Log.e("ORDER", settingsRepository.order.toString())
     }
 
     override fun setListeners() {
@@ -111,6 +114,11 @@ class PostListFragment : BaseFragment() {
         } else {
             tvEmptyList.isVisible = false
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        settingsRepository.order = "It's unit!"
     }
 
     override fun onDestroyView() {

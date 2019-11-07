@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
@@ -17,10 +18,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:text="Булочки с маком"
             android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
             app:layout_constraintStart_toEndOf="@+id/ivImage"
-            app:layout_constraintTop_toTopOf="@+id/ivImage" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvDescription"
@@ -42,36 +45,59 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
             android:background="#ffffff"
             android:padding="10dp"
             android:src="@drawable/ic_pizza"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/btnToOrder"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/tvTitle" />
 
         <TextView
             android:id="@+id/tvPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginEnd="2dp"
             android:text="0"
+            android:textColor="@color/colorGreen"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/clAddRemoveProduct"
-            app:layout_constraintStart_toEndOf="@+id/clAddRemoveProduct"
+            app:layout_constraintEnd_toStartOf="@+id/tvRuble"
             app:layout_constraintTop_toTopOf="@+id/clAddRemoveProduct" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tvRuble"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
+            android:layout_marginEnd="32dp"
             android:text="@string/ruble"
+            android:textColor="@color/colorGreen"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/tvPrice"
-            app:layout_constraintStart_toEndOf="@+id/tvPrice"
+            app:layout_constraintEnd_toStartOf="@+id/tvAvailability"
             app:layout_constraintTop_toTopOf="@+id/tvPrice" />
+
+        <TextView
+            android:id="@+id/tvAvailability"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            android:text="0"
+            android:textSize="12sp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/ivStore"
+            app:layout_constraintEnd_toStartOf="@+id/ivStore"
+            app:layout_constraintTop_toTopOf="@+id/ivStore" />
+
+        <ImageView
+            android:id="@+id/ivStore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/ic_store"
+            app:layout_constraintBottom_toBottomOf="@+id/btnToOrder"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btnToOrder" />
+
 
         <Button
             android:id="@+id/btnToOrder"
@@ -92,6 +118,9 @@
             android:id="@+id/clAddRemoveProduct"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ivImage"
@@ -128,41 +157,6 @@
                 app:layout_constraintStart_toEndOf="@+id/tvAmountOfItemsAdded"
                 app:layout_constraintTop_toTopOf="@+id/btnRemoveProduct" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <TextView
-            android:id="@+id/tvAvailabilityTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:text="В наличии:"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@+id/ivImage"
-            app:layout_constraintStart_toEndOf="@+id/ivImage"
-            app:layout_constraintTop_toBottomOf="@+id/tvDescription"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <TextView
-            android:id="@+id/tvAvailability"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:text="0"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@+id/tvAvailabilityTitle"
-            app:layout_constraintStart_toEndOf="@+id/tvAvailabilityTitle"
-            app:layout_constraintTop_toTopOf="@+id/tvAvailabilityTitle" />
-
-        <TextView
-            android:id="@+id/tvAvailabilityPostfix"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:text="@string/units"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@+id/tvAvailability"
-            app:layout_constraintStart_toEndOf="@+id/tvAvailability"
-            app:layout_constraintTop_toTopOf="@+id/tvAvailability" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

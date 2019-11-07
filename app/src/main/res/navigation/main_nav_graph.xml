@@ -11,12 +11,40 @@
         tools:layout="@layout/fragment_post_list">
         <action
             android:id="@+id/actionToPostDetails"
-            app:destination="@+id/postDetailsFragment" />
+            app:destination="@+id/postDetailsFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/actionToSettings"
+            app:destination="@+id/settingsFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/actionToPostListFragment"
+            app:destination="@+id/postListFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/postListFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
         android:id="@+id/postDetailsFragment"
         android:name="com.example.myapplication.ui.post.PostDetailsFragment"
         tools:layout="@layout/fragment_post_details" />
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.myapplication.ui.settings.SettingsFragment">
+        <action
+            android:id="@+id/actionToPostListFragment"
+            app:destination="@+id/postListFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/postListFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/actionToSettings"
+            app:destination="@+id/settingsFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/settingsFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 
 </navigation>

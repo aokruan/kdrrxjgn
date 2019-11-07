@@ -26,11 +26,24 @@ class SettingsRepository @Inject constructor(
                 .apply()
         }
 
+    var order: String?
+        get() {
+            return try {
+                sharedPreferences.getString("order", "")
+            } catch (e: JsonSyntaxException) {
+                null
+            }
+        }
+        set(value) {
+            sharedPreferences.edit()
+                .putString("order", value)
+                .apply()
+        }
+
     val isValidatedAuthToken: Int?
         get() {
             val accessToken = App.sharedPreferences.getString("authToken", "").toString()
             return if (accessToken.isNotBlank())
                 0 else R.id.authFragment
-}
-
+        }
 }

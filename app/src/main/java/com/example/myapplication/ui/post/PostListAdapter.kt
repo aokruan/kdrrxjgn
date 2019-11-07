@@ -5,15 +5,19 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
+import com.example.myapplication.data.repository.SettingsRepository
 import com.example.myapplication.domain.entity.Post
 import com.example.myapplication.presentation.inflate
 import kotlinx.android.synthetic.main.post_item.view.*
+import javax.inject.Inject
 import kotlin.properties.Delegates
 
 class PostListAdapter(
     private val onPostClick: (post: Post) -> Unit
 ) : RecyclerView.Adapter<PostListAdapter.ViewHolder>() {
-
+/*    @Inject
+    lateinit var settingsRepository: SettingsRepository*/
+    val orderMap = mutableMapOf<Long, Int>()
     var postList: List<Post> by Delegates.observable(listOf()) { _, _, _ ->
         notifyDataSetChanged()
     }
@@ -28,6 +32,7 @@ class PostListAdapter(
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
         fun bind(post: Post) {
             itemView.setOnClickListener {
                 onPostClick(post)
@@ -47,6 +52,9 @@ class PostListAdapter(
                     tvAmountOfItemsAdded.text = 1.toString()
                     btnToOrder.visibility = View.INVISIBLE
                     clAddRemoveProduct.visibility = View.VISIBLE
+/*                    orderMap[post.id] = tvAmountOfItemsAdded.text.toString().toInt()
+                    settingsRepository.order = orderMap.toString()
+                    Log.e("ORDER", settingsRepository.order.toString())*/
                 }
 
                 btnRemoveProduct?.setOnClickListener {

@@ -12,4 +12,9 @@
     <string name="text_signup">Заполните поля \nчтобы создать новый акаунт</string>
 
     <string name="post_empty_list">Список пуст</string>
+    <string-array name="job_mode">
+        <item>Минимальный</item>
+        <item>Обычный</item>
+        <item>Критический</item>
+    </string-array>
 </resources>

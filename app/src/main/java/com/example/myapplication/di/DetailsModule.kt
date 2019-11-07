@@ -5,6 +5,7 @@ import com.example.myapplication.data.repository.SettingsRepository
 import com.example.myapplication.domain.interactor.PostInteractor
 import com.example.myapplication.service.Api
 import com.example.myapplication.service.ApiHolder
+import com.example.myapplication.ui.post.PostListAdapter
 import com.example.myapplication.viewModel.post.PostDetailsViewModel
 import com.example.myapplication.viewModel.post.PostListViewModel
 import com.google.gson.Gson

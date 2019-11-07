@@ -8,6 +8,7 @@
     <color name="colorWindowBackground">#eceff1</color>
     <color name="colorComponentsBackground">#fff</color>
     <color name="colorOrange">#F79F2F</color>
+    <color name="colorGreen">#6CB931</color>
 
     <color name="design_snackbar_background_color" tools:ignore="UnusedResources" tools:override="true">
         @color/colorPrimaryLight
