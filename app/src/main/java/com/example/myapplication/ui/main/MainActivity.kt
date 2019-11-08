@@ -24,7 +24,7 @@ class MainActivity : DaggerAppCompatActivity() {
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.bnRecents -> findNavController(main_host_fragment).navigate(R.id.actionToPostListFragment)
-                R.id.action_favorites -> ""
+                R.id.action_favorites -> findNavController(main_host_fragment).navigate(R.id.actionToOrderListFragment)
                 R.id.bnNearby -> findNavController(main_host_fragment).navigate(R.id.actionToSettings)
             }
             true

@@ -5,7 +5,7 @@ import com.example.myapplication.data.repository.SettingsRepository
 import com.example.myapplication.domain.interactor.PostInteractor
 import com.example.myapplication.service.Api
 import com.example.myapplication.service.ApiHolder
-import com.example.myapplication.ui.post.PostListAdapter
+import com.example.myapplication.viewModel.order.OrderListViewModel
 import com.example.myapplication.viewModel.post.PostDetailsViewModel
 import com.example.myapplication.viewModel.post.PostListViewModel
 import com.google.gson.Gson
@@ -30,8 +30,12 @@ class DetailsModule {
     fun provideGson(): Gson = GsonBuilder().create()
 
     @Provides
-    fun provideViewModel(postInteractor: PostInteractor): PostListViewModel =
+    fun providePostListViewModel(postInteractor: PostInteractor): PostListViewModel =
         PostListViewModel(postInteractor)
+
+    @Provides
+    fun provideOrderListViewModel(postInteractor: PostInteractor): OrderListViewModel =
+        OrderListViewModel(postInteractor)
 
     @Provides
     fun providePostDetailsViewModel(postInteractor: PostInteractor): PostDetailsViewModel =

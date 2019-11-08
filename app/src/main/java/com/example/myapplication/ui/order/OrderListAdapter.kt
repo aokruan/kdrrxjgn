@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.post
+package com.example.myapplication.ui.order
 
 import android.view.View
 import android.view.ViewGroup
@@ -7,21 +7,18 @@ import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.domain.entity.Post
 import com.example.myapplication.presentation.inflate
-import kotlinx.android.synthetic.main.post_item.view.*
+import kotlinx.android.synthetic.main.order_item.view.*
 import kotlin.properties.Delegates
 
-class PostListAdapter(
-    private val onPostClick: (post: Post) -> Unit
-) : RecyclerView.Adapter<PostListAdapter.ViewHolder>() {
-/*    @Inject
-    lateinit var settingsRepository: SettingsRepository*/
-    val orderMap = mutableMapOf<Long, Int>()
+class OrderListAdapter(
+    /*private val onPostClick: (post: Post) -> Unit*/
+) : RecyclerView.Adapter<OrderListAdapter.ViewHolder>() {
     var postList: List<Post> by Delegates.observable(listOf()) { _, _, _ ->
         notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-        parent.inflate(R.layout.post_item).let(::ViewHolder)
+        parent.inflate(R.layout.order_item).let(::ViewHolder)
 
     override fun getItemCount(): Int = postList.size
 
@@ -33,12 +30,11 @@ class PostListAdapter(
 
         fun bind(post: Post) {
             itemView.setOnClickListener {
-                onPostClick(post)
+                /*onPostClick(post)*/
             }
             with(itemView) {
                 tvTitle.text = post.title
                 tvDescription.text = post.description
-                tvAvailability.text = post.availability.toString()
                 tvPrice.text = post.price.toString()
                 Glide.with(context)
                     .load(post.image)
@@ -46,21 +42,11 @@ class PostListAdapter(
                     .fitCenter()
                     .into(ivImage)
 
-                btnToOrder.setOnClickListener {
-                    tvAmountOfItemsAdded.text = 1.toString()
-                    btnToOrder.visibility = View.INVISIBLE
-                    clAddRemoveProduct.visibility = View.VISIBLE
-/*                    orderMap[post.id] = tvAmountOfItemsAdded.text.toString().toInt()
-                    settingsRepository.order = orderMap.toString()
-                    Log.e("ORDER", settingsRepository.order.toString())*/
-                }
-
                 btnRemoveProduct?.setOnClickListener {
                     val tvAmount = tvAmountOfItemsAdded.text
                     when (tvAmount.toString()) {
                         "1" -> {
                             tvAmountOfItemsAdded.text = 1.toString()
-                            btnToOrder.visibility = View.VISIBLE
                             clAddRemoveProduct.visibility = View.INVISIBLE
                         }
                         else -> {
@@ -75,7 +61,6 @@ class PostListAdapter(
                     if (tvAmount.toString() != 10.toString()) {
                         tvAmountOfItemsAdded.text =
                             (tvAmountOfItemsAdded.text.toString().toInt() + 1).toString()
-                        btnToOrder.visibility = View.INVISIBLE
                         clAddRemoveProduct.visibility = View.VISIBLE
                     } else {
                         tvAmountOfItemsAdded.text = 10.toString()

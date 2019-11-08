@@ -23,6 +23,36 @@
             app:launchSingleTop="true"
             app:popUpTo="@id/postListFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/actionToOrderListFragment"
+            app:destination="@+id/orderListFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/orderListFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/orderListFragment"
+        android:name="com.example.myapplication.ui.post.OrderListFragment"
+        tools:layout="@layout/fragment_order_list">
+        <action
+            android:id="@+id/actionToPostListFragment"
+            app:destination="@+id/postListFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/postListFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/actionToSettings"
+            app:destination="@+id/settingsFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/settingsFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/actionToOrderListFragment"
+            app:destination="@+id/orderListFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/orderListFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -44,6 +74,12 @@
             app:destination="@+id/settingsFragment"
             app:launchSingleTop="true"
             app:popUpTo="@id/settingsFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/actionToOrderListFragment"
+            app:destination="@+id/orderListFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/orderListFragment"
             app:popUpToInclusive="true" />
     </fragment>
 

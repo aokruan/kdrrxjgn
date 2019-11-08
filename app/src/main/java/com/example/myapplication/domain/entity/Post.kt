@@ -38,3 +38,4 @@ data class Post(
     val title: String,
     val updated_at: String
 ) : Parcelable
+
