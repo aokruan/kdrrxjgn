@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:orientation="vertical"
-                android:hint="0"
+                android:hint="1"
                 android:textColor="@color/colorGreen"
                 android:textSize="16dp"
                 android:textStyle="normal" />

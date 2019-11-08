@@ -2,7 +2,6 @@ package com.example.myapplication.ui.main
 
 import android.os.Bundle
 import androidx.navigation.fragment.NavHostFragment.findNavController
-import androidx.navigation.fragment.findNavController
 import com.example.myapplication.R
 import com.example.myapplication.data.repository.SettingsRepository
 import dagger.Lazy

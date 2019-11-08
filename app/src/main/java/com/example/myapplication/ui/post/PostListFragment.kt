@@ -24,14 +24,14 @@ import kotlinx.android.synthetic.main.fragment_post_list.*
 import javax.inject.Inject
 
 class PostListFragment : BaseFragment() {
-
     @Inject
     lateinit var viewModel: PostListViewModel
     @Inject
     lateinit var settingsRepository: SettingsRepository
     override val layoutRes: Int = R.layout.fragment_post_list
     private val disposeBag = CompositeDisposable()
-    private val postListAdapter = PostListAdapter(onPostClick = this::routeToDetails)
+    private val postListAdapter = PostListAdapter(onPostClick = this::routeToDetails, onProvideForViewModel = this::provideForViewModel)
+    private val postHotListAdapter = PostHotListAdapter()
     private val loadingDialog: LottieAlertDialog by lazy {
         createDialog(
             this.requireContext(),
@@ -68,6 +68,7 @@ class PostListFragment : BaseFragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 postListAdapter.postList = it
+                postHotListAdapter.postList = it
             }
             .addTo(disposeBag)
 
@@ -97,12 +98,24 @@ class PostListFragment : BaseFragment() {
             rv.layoutManager = LinearLayoutManager(activity)
             rv.adapter = postListAdapter
         }
+
+        rvHotList.also { rv ->
+            rv.setHasFixedSize(true)
+            rv.isMotionEventSplittingEnabled = false
+            rv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+            rv.adapter = postHotListAdapter
+        }
     }
 
     private fun routeToDetails(post: Post) {
         hideKeyboard()
         val bundle = bundleOf("post" to post)
         findNavController().navigate(R.id.actionToPostDetails, bundle)
+    }
+
+    /*Метод передаёт данные во ViewModel*/
+    private fun provideForViewModel(data:ArrayList<Int>?){
+        viewModel.provideForViewModel(data)
     }
 
     private fun setEmptyListStatus(status: EmptyList) {

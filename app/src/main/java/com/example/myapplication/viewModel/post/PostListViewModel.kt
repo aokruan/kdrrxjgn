@@ -71,6 +71,10 @@ class PostListViewModel @Inject constructor(
             .addTo(disposable)
     }
 
+    fun provideForViewModel(msg: ArrayList<Int>??) {
+        Log.e("RESULT", msg.toString())
+    }
+
     private fun reset() {
         emptyStatus.onNext(EmptyList.NONE)
         isEndOfList = false

@@ -11,11 +11,13 @@ import kotlinx.android.synthetic.main.post_item.view.*
 import kotlin.properties.Delegates
 
 class PostListAdapter(
-    private val onPostClick: (post: Post) -> Unit
+    private val onPostClick: (post: Post) -> Unit,
+    private val onProvideForViewModel: (data: ArrayList<Int>?) -> Unit
 ) : RecyclerView.Adapter<PostListAdapter.ViewHolder>() {
-/*    @Inject
-    lateinit var settingsRepository: SettingsRepository*/
-    val orderMap = mutableMapOf<Long, Int>()
+    /*    @Inject
+        lateinit var settingsRepository: SettingsRepository*/
+    /*val orderMap = mutableMapOf<Long, Int>()*/
+    val orderMap = arrayListOf<Int>()
     var postList: List<Post> by Delegates.observable(listOf()) { _, _, _ ->
         notifyDataSetChanged()
     }
@@ -50,9 +52,11 @@ class PostListAdapter(
                     tvAmountOfItemsAdded.text = 1.toString()
                     btnToOrder.visibility = View.INVISIBLE
                     clAddRemoveProduct.visibility = View.VISIBLE
-/*                    orderMap[post.id] = tvAmountOfItemsAdded.text.toString().toInt()
-                    settingsRepository.order = orderMap.toString()
-                    Log.e("ORDER", settingsRepository.order.toString())*/
+                    orderMap.add(post.id.toInt())
+
+                    /*Callback для предачи данных во Fragment. Далее -> ViewModel*/
+                    onProvideForViewModel(orderMap)
+                    /*settingsRepository.order = orderMap.toString()*/
                 }
 
                 btnRemoveProduct?.setOnClickListener {
